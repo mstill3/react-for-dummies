@@ -1,6 +1,6 @@
-# React101
+# React for Dummies
 
-Teaching myself the basics of React, SASS and Typescript.
+Teaching the basics of React, SASS and Typescript
 
 ### Installation
 
