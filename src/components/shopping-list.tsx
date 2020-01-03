@@ -19,7 +19,7 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
 
     add = () =>
     {
-        const newList: Array<Item> = this.state.items.concat( new Item(this.state.newitem.name) );
+        const newList: Array<Item> = this.state.items.concat( new Item(this.state.newitem.getName()) );
         this.setState({ items: newList });
     }
 
@@ -32,7 +32,7 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
     removeItem = (event: MouseEvent, uuid: string) =>
     {
         event.preventDefault();
-        const newList: Array<Item> = this.state.items.filter((item) => item.id != uuid);
+        const newList: Array<Item> = this.state.items.filter((item) => item.getId() != uuid);
         this.setState({ items: newList });
     }
 
@@ -41,8 +41,8 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
         event.preventDefault();
         var editList: Array<Item> = this.state.items;
         for (var i = 0; i < editList.length; i++)
-            if(editList[i].id == uuid)
-                editList[i].name = this.state.newitem.name;
+            if(editList[i].getId() == uuid)
+                editList[i].setName(this.state.newitem.getName());
 
         this.setState({ items: editList });
     }
@@ -64,7 +64,7 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
             <div>
                 <input
                   placeholder="Enter topic here..." 
-                  value={ this.state.newitem.name }
+                  value={ this.state.newitem.getName() }
                   onChange={ this.handleTextChange }
                   onKeyDown={ this.handleEnterPress }
                 />

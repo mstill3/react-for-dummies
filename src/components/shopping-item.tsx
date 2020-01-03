@@ -8,8 +8,8 @@ import uuid from 'uuid/v4'
 class Item 
 {
 
-    public id: string;
-    public name: string;
+    private id: string;
+    private name: string;
     
     constructor(name: string)
     {
@@ -17,6 +17,25 @@ class Item
         this.name = name;
     }
 
+    getId()
+    {
+        return this.id;
+    }
+
+    setId(uuid: string)
+    {
+        this.id = uuid;
+    }
+
+    getName()
+    {
+        return this.name;
+    }
+
+    setName(name: string)
+    {
+        this.name = name;
+    }
 }
 
 export { Item };
@@ -29,15 +48,15 @@ class ShoppingItem extends Component<ShoppingItemPropsInterface, EmptyInterface>
     {
         return (
             <div className="itemBox">
-                <span> {this.props.item.name} </span>
+                <span> {this.props.item.getName()} </span>
                 <button 
                     className="btn btn-dark btn-sm"
-                    onClick={(e) => this.props.clicked(e, this.props.item.id)}> 
+                    onClick={(e) => this.props.clicked(e, this.props.item.getId())}> 
                     %
                 </button>
                 <button 
                     className="btn btn-danger btn-sm"
-                    onClick={(e) => this.props.removed(e, this.props.item.id)}> 
+                    onClick={(e) => this.props.removed(e, this.props.item.getId())}> 
                     - 
                 </button>
             </div>

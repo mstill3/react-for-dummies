@@ -1,4 +1,3 @@
-import { AnyTxtRecord } from "dns";
 import { Item } from "./components/shopping-item";
 
 // Defines the shape of component props and the todo object, or to type them
