@@ -3,6 +3,8 @@
 import React, { Component, MouseEvent, ChangeEvent, KeyboardEvent} from 'react'
 import { EmptyInterface, ShoppingListStateInterface } from '../interfaces'
 import ShoppingItem, { Item } from './shopping-item';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 // Create component class
 class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
@@ -63,7 +65,7 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
         return (
             <div>
                 <input
-                  placeholder="Enter topic here..." 
+                  placeholder=" Enter new grocery " 
                   value={ this.state.newitem.getName() }
                   onChange={ this.handleTextChange }
                   onKeyDown={ this.handleEnterPress }
@@ -71,7 +73,7 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
                 <button 
                     className="btn btn-primary btn-sm"
                     onClick={this.addItem}> 
-                    +
+                    <FontAwesomeIcon icon={faPlus} />
                 </button>
 
                 {

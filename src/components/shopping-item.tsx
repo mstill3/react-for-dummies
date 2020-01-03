@@ -2,6 +2,9 @@
 // Import dependencies
 import React, { Component } from 'react'
 import { EmptyInterface, ShoppingItemPropsInterface } from '../interfaces'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCog, faMinus } from '@fortawesome/free-solid-svg-icons'
+
 import uuid from 'uuid/v4'
 
 // Base Item class
@@ -50,14 +53,14 @@ class ShoppingItem extends Component<ShoppingItemPropsInterface, EmptyInterface>
             <div className="itemBox">
                 <span> {this.props.item.getName()} </span>
                 <button 
-                    className="btn btn-dark btn-sm"
+                    className="btn btn-dark btn-sm fluff"
                     onClick={(e) => this.props.clicked(e, this.props.item.getId())}> 
-                    %
+                    <FontAwesomeIcon icon={faCog} />
                 </button>
                 <button 
-                    className="btn btn-danger btn-sm"
+                    className="btn btn-danger btn-sm fluff"
                     onClick={(e) => this.props.removed(e, this.props.item.getId())}> 
-                    - 
+                    <FontAwesomeIcon icon={faMinus} />
                 </button>
             </div>
         );
