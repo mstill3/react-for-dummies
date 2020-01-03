@@ -2,7 +2,7 @@
 // Import dependencies
 import React, { Component, MouseEvent, ChangeEvent, KeyboardEvent} from 'react'
 import { EmptyInterface, ShoppingListStateInterface } from '../interfaces'
-
+import ShoppingItem, { Item } from './shopping-item';
 
 // Create component class
 class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
@@ -12,14 +12,14 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
     {
         super(props);
         this.state = {
-            newitemName: "",
-            items: new Array<string>()
+            newitem: new Item(""),
+            items: new Array<Item>()
         };
     }
 
     add = () =>
     {
-        const newList: Array<string> = this.state.items.concat(this.state.newitemName);
+        const newList: Array<Item> = this.state.items.concat( new Item(this.state.newitem.name) );
         this.setState({ items: newList });
     }
 
@@ -29,27 +29,27 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
         this.add();
     }
 
-    removeItem = (event: MouseEvent, removeName: string) =>
+    removeItem = (event: MouseEvent, uuid: string) =>
     {
         event.preventDefault();
-        const newList: Array<string> = this.state.items.filter((name) => (name !== removeName))
+        const newList: Array<Item> = this.state.items.filter((item) => item.id != uuid);
         this.setState({ items: newList });
     }
 
-    editItem = (event: MouseEvent, editName: string) =>
+    editItem = (event: MouseEvent, uuid: string) =>
     {
         event.preventDefault();
-        var editList: Array<string> = this.state.items;
+        var editList: Array<Item> = this.state.items;
         for (var i = 0; i < editList.length; i++)
-            if(editList[i] == editName)
-                editList[i] = this.state.newitemName;
+            if(editList[i].id == uuid)
+                editList[i].name = this.state.newitem.name;
 
         this.setState({ items: editList });
     }
 
     handleTextChange = (event: ChangeEvent<HTMLInputElement>) =>
     {
-        this.setState({ newitemName: event.target.value});
+        this.setState({ newitem: new Item(event.target.value)});
     }
 
     handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) =>
@@ -64,7 +64,7 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
             <div>
                 <input
                   placeholder="Enter topic here..." 
-                  value={ this.state.newitemName }
+                  value={ this.state.newitem.name }
                   onChange={ this.handleTextChange }
                   onKeyDown={ this.handleEnterPress }
                 />
@@ -75,20 +75,11 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
                 </button>
 
                 {
-                    this.state.items.map((item) => (
-                        <div className="itemBox">
-                            <span> {item} </span>
-                            <button 
-                                className="btn btn-dark btn-sm"
-                                onClick={(e) => this.editItem(e, item)}> 
-                                %
-                            </button>
-                            <button 
-                                className="btn btn-danger btn-sm"
-                                onClick={(e) => this.removeItem(e, item)}> 
-                                - 
-                            </button>
-                        </div>
+                    this.state.items.map((item: Item) => (
+                        <ShoppingItem 
+                            item={item}
+                            clicked={this.editItem}
+                            removed={this.removeItem}/>
                     ))
                 }
             </div>

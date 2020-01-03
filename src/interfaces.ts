@@ -1,3 +1,6 @@
+import { AnyTxtRecord } from "dns";
+import { Item } from "./components/shopping-item";
+
 // Defines the shape of component props and the todo object, or to type them
 
 export interface EmptyInterface {}
@@ -11,10 +14,12 @@ export interface GreetingStateInterface {
 }
 
 export interface ShoppingListStateInterface {
-  newitemName: string;
-  items: Array<string>;
+  newitem: Item;
+  items: Array<Item>;
 }
 
-export interface GreetingPropsInterface {
-  name: string;
+export interface ShoppingItemPropsInterface {
+  item: Item;
+  clicked: any;
+  removed: any;
 }
