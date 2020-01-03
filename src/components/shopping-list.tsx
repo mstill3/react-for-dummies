@@ -64,6 +64,9 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
     {
         return (
             <div>
+                <h2>
+                    My List
+                </h2>
                 <input
                   placeholder=" Enter new grocery " 
                   value={ this.state.newitem.getName() }

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { EmptyInterface, ShoppingItemPropsInterface } from '../interfaces'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 import uuid from 'uuid/v4'
 
@@ -51,11 +51,19 @@ class ShoppingItem extends Component<ShoppingItemPropsInterface, EmptyInterface>
     {
         return (
             <div className="itemBox">
+                {/* {
+                    this.props.edit && 
+                    <input> {this.props.item.getName()} </input>
+                }
+                {
+                    !this.props.edit && 
+                    <span> {this.props.item.getName()} </span>
+                }  */}
                 <span> {this.props.item.getName()} </span>
                 <button 
                     className="btn btn-dark btn-sm fluff"
                     onClick={(e) => this.props.clicked(e, this.props.item.getId())}> 
-                    <FontAwesomeIcon icon={faCog} />
+                    <FontAwesomeIcon icon={faPencilAlt} />
                 </button>
                 <button 
                     className="btn btn-danger btn-sm fluff"
