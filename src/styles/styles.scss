@@ -1,9 +1,17 @@
 @import "variables.scss";
 
-body {
+html, body {
+  height: 100%;  
   background-color: $background-color;
 }
 
-.shiftdown {
+.main {
+  text-align: center;
   padding-top: 50px;
+  background-color: $container-color;
+  min-height: 100vh;
+}
+
+.itemBox {
+  padding: 10px;
 }

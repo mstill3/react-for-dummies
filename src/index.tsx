@@ -5,6 +5,7 @@ import { render } from 'react-dom'
 
 // Import components
 // import Greeting from './components/greeting'
+import ShoppingList from './components/shopping-list'
 import Greeting from './components/greeting'
 
 // Import styles
@@ -29,19 +30,17 @@ import './styles/styles.scss'
 //   )
 // }
 
-class App extends Component
+const App = () =>
 {
 
-  render = () =>
-  {
     return (
       <div
-       className="container shiftdown">
-          <Greeting 
-           name="Matt"/>
+       className="container main">
+          {/* <Greeting 
+           name="Matt"/> */}
+           <ShoppingList />
       </div>
     );
-  }
   
 }
 

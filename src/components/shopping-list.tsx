@@ -1,6 +1,6 @@
 
 // Import dependencies
-import React, { Component, MouseEvent, ChangeEvent } from 'react'
+import React, { Component, MouseEvent, ChangeEvent, KeyboardEvent} from 'react'
 import { EmptyInterface, ShoppingListStateInterface } from '../interfaces'
 
 
@@ -17,11 +17,16 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
         };
     }
 
+    add = () =>
+    {
+        const newList: Array<string> = this.state.items.concat(this.state.newitemName);
+        this.setState({ items: newList });
+    }
+
     addItem = (event: MouseEvent) =>
     {
         event.preventDefault();
-        const newList: Array<string> = this.state.items.concat(this.state.newitemName);
-        this.setState({ items: newList });
+        this.add();
     }
 
     removeItem = (event: MouseEvent, removeName: string) =>
@@ -38,13 +43,19 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
         for (var i = 0; i < editList.length; i++)
             if(editList[i] == editName)
                 editList[i] = this.state.newitemName;
-                
+
         this.setState({ items: editList });
     }
 
     handleTextChange = (event: ChangeEvent<HTMLInputElement>) =>
     {
         this.setState({ newitemName: event.target.value});
+    }
+
+    handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) =>
+    {
+        if(event.key === 'Enter')
+            this.add();
     }
 
     render = () =>
@@ -55,25 +66,27 @@ class ShoppingList extends Component<EmptyInterface, ShoppingListStateInterface>
                   placeholder="Enter topic here..." 
                   value={ this.state.newitemName }
                   onChange={ this.handleTextChange }
+                  onKeyDown={ this.handleEnterPress }
                 />
                 <button 
                     className="btn btn-primary btn-sm"
                     onClick={this.addItem}> 
                     +
                 </button>
+
                 {
                     this.state.items.map((item) => (
-                        <div>
-                            <p> {item} </p>
+                        <div className="itemBox">
+                            <span> {item} </span>
+                            <button 
+                                className="btn btn-dark btn-sm"
+                                onClick={(e) => this.editItem(e, item)}> 
+                                %
+                            </button>
                             <button 
                                 className="btn btn-danger btn-sm"
                                 onClick={(e) => this.removeItem(e, item)}> 
                                 - 
-                            </button>
-                            <button 
-                                className="btn btn-info btn-sm"
-                                onClick={(e) => this.editItem(e, item)}> 
-                                %
                             </button>
                         </div>
                     ))
